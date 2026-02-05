@@ -13,8 +13,8 @@ const navigate = useNavigate();
                     <select className="select" value={filter}
                      onChange={(event) => setFilter(event.target.value)}>
                         <option value='All'>All</option>
-                        <option value='Completed'>Completed</option>
-                        <option value='Pending'>Pending</option>
+                        <option value='Completed'>Completed {taskslist.filter(task => task.status).length}</option>
+                        <option value='Pending'>Pending {taskslist.filter(task => !task.status).length}</option>
                     </select>}
                     <Button onClick={() => navigate('/task/new')} className='crttaskbtn'>Add Task</Button>
                     {taskslist.length > 0 && <>

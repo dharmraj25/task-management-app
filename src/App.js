@@ -2,14 +2,19 @@ import Header from './App/Header';
 import './App.css';
 import TaskInput from './App/TaskInput';
 import TaskList from './App/TaskList';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import CreateTask from './App/CreateTask';
 import TaskDetails from './App/TaskDetails';
 
 function App() {
-  const [taskslist, setTaskslist] = useState([]);
-  const [counter, setCounter] = useState(1);
+  const [taskslist, setTaskslist] = useState(() => {
+    const saved = localStorage.getItem('taskslist');
+    return saved? JSON.parse(saved) : [];
+  });
+  const [counter, setCounter] = useState(() => {
+    return JSON.parse(localStorage.getItem('counter')) || 1;
+  });
   const [filter, setFilter] = useState('All');
 
   function addTasks(taskName, description) {
@@ -41,6 +46,14 @@ function App() {
     if (filter === 'Pending') return !task.status;
     return true;
   })
+
+  useEffect(() => {
+    localStorage.setItem('taskslist', JSON.stringify(taskslist));
+  }, [taskslist]);
+
+  useEffect(() => {
+    localStorage.setItem('counter', JSON.stringify(counter));
+  }, [counter]);
 
   return (
     <>
