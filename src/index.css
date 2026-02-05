@@ -32,6 +32,7 @@
   justify-content: center;
   gap: 10px;
   margin-top: 80px;
+  margin-left: 90px;
 }
 
 .input {
@@ -117,7 +118,7 @@ th, td{
 .crttask{
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
+  margin-top: 50px;
   gap: 50px;
   font-family: 'Copperplate Gothic Light';
 }
@@ -168,7 +169,7 @@ th, td{
   height: 52px;
 }
 
-.deletebtn:disabled{
+.inputbtn:disabled{
   cursor: not-allowed;
 }
 
@@ -184,7 +185,7 @@ margin-left: 50px;
 .taskdetails{
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
+  margin-top: 50px;
   gap: 50px;
   font-family: 'Copperplate Gothic Light';
   align-items: center;
@@ -193,5 +194,52 @@ margin-left: 50px;
 
 .taskdetails label{
  font-weight: bold;
- font-size: 20px;
+ font-size: 18px;
 }
+
+.detailpara{
+  font-family: 'Copperplate Gothic Light';
+  font-size: 13px;
+  font-weight: bold;
+  display: flex;
+  vertical-align: middle;
+  margin-left: 300px;
+  margin-top: 50px;
+  gap: 10px;
+}
+
+.detailcheckbox{
+  width: 20px;
+  height: 20px;
+}
+
+.inputbtn-container{
+  display: flex;
+  gap: 10px;
+  margin-left: 500px;
+}
+
+.inputbtn{
+  background : linear-gradient(135deg, #bdc3c7 50%, #2c3e50 100%);
+  color : black;
+  border-radius: 3px;
+  border: none;
+  padding: 5px 10px;
+  font-family: 'Copperplate Gothic Light';
+  font-size: 20px;
+  cursor: pointer;
+  height: 40px;
+  gap: 10px;
+}
+
+.trash{
+  width: 20px;
+  height: 20px;
+}
+
+.firstAddbtn{
+  margin-bottom: 100px;
+}
+
+
+

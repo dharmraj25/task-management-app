@@ -20,16 +20,15 @@ function App() {
   function addTasks(taskName, description) {
     setTaskslist(prevTasks => 
       [...prevTasks, {
-        id: counter, status: false, title: taskName,
+        selected: false, id: counter, status: false, title: taskName,
         description: description, createdOn: new Date().toLocaleDateString()
       }])
       setCounter(prevCounter => prevCounter + 1);
   }
 
-
   function handleDeleteTasks() {
     setTaskslist((prevTasks) => {
-      return prevTasks.filter(task => !task.status)
+      return prevTasks.filter(task => !task.selected)
     })
   }
 
@@ -37,6 +36,22 @@ function App() {
     setTaskslist((prevTasks) => {
       return prevTasks.map(task => (
         task.id === idTOTOggle ? { ...task, status: !task.status } : task
+      ))
+    })
+  }
+
+  function handleSelectOne(id) {
+    setTaskslist((prevTasks) => {
+      return prevTasks.map(task => (
+        task.id === id ? { ...task, selected: !task.selected } : task
+      ))
+    })
+  }
+
+  function handleSelectAll(isChecked) {
+    setTaskslist((prevTasks) => {
+      return prevTasks.map(task => (
+        {...task, selected: isChecked}
       ))
     })
   }
@@ -67,7 +82,8 @@ function App() {
         onDeleteTasks={handleDeleteTasks}
         filter={filter}
         setFilter={setFilter} />
-      <TaskList taskslist={filteredTask} onToggle={handleToggle} />
+      <TaskList taskslist={filteredTask} onSelectOne={handleSelectOne}
+       onSelectAll={handleSelectAll} />
       </>} 
       />
       <Route 
@@ -78,7 +94,7 @@ function App() {
       />
       <Route 
       path='/task/:id'
-      element={<TaskDetails taskslist={taskslist}/>}
+      element={<TaskDetails taskslist={taskslist} onToggle={handleToggle} />}
       />
       </Routes>
     </>
