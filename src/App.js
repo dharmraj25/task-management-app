@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import CreateTask from './App/CreateTask';
 import TaskDetails from './App/TaskDetails';
+import UpdateTask from './App/UpdateTask';
 
 function App() {
   const [taskslist, setTaskslist] = useState(() => {
@@ -70,6 +71,15 @@ function App() {
     localStorage.setItem('counter', JSON.stringify(counter));
   }, [counter]);
 
+  function handleUpdateTask(id, updatedTitle, updatedDesc){
+    setTaskslist(prev => 
+      prev.map(task => 
+        task.id === id ? {...task, title : updatedTitle, description : updatedDesc} : task
+      )
+    )
+    
+  }
+
   return (
     <>
       <Header />
@@ -78,12 +88,19 @@ function App() {
         path='/'
         element={
       <>
+      <div className="page-layout">
+        <div className="left-section">
+      <TaskList taskslist={filteredTask} onSelectOne={handleSelectOne}
+       onSelectAll={handleSelectAll} />
+       </div>
+      <div className="right-section">
       <TaskInput  taskslist={taskslist}
         onDeleteTasks={handleDeleteTasks}
         filter={filter}
-        setFilter={setFilter} />
-      <TaskList taskslist={filteredTask} onSelectOne={handleSelectOne}
-       onSelectAll={handleSelectAll} />
+        setFilter={setFilter}
+        />
+      </div>
+       </div>
       </>} 
       />
       <Route 
@@ -94,7 +111,15 @@ function App() {
       />
       <Route 
       path='/task/:id'
-      element={<TaskDetails taskslist={taskslist} onToggle={handleToggle} />}
+      element={
+      <TaskDetails taskslist={taskslist} onToggle={handleToggle} /> }
+      />
+      <Route 
+      path='/task/Update/:id'
+      element={
+        <UpdateTask onUpdate={handleUpdateTask} taskslist={taskslist}
+        onToggle={handleToggle} />
+      }
       />
       </Routes>
     </>

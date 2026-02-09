@@ -1,6 +1,5 @@
 import Notes from "../App/Notes.png";
 import { Link } from "react-router-dom";
-import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 
 export default function TaskList({ taskslist, onSelectAll, onSelectOne }) {
@@ -9,11 +8,6 @@ export default function TaskList({ taskslist, onSelectAll, onSelectOne }) {
 
     return (
         <>
-        {taskslist.length === 0 && <div className="else-container">
-        <Button onClick={() => navigate('/task/new')} className='crttaskbtn firstAddbtn'>Add Task</Button>
-        <img className="notesimage" src={Notes} alt="Notes Image" />
-        <p>Please Add A Task....</p></div>}
-        {taskslist.length > 0 &&
         <div className="table-container">
         <table className="table">
         <thead>
@@ -29,6 +23,18 @@ export default function TaskList({ taskslist, onSelectAll, onSelectOne }) {
         </thead>
         
         <tbody>
+        {taskslist.length === 0 && <>
+        <tr>
+        <td colSpan={5}>
+            <div className="no-records">
+                <img src={Notes} alt="Notes" className="notesimage" />
+            </div>
+            <div className="no-records-text">
+                No Records Found!
+            </div>
+        </td>
+        </tr>
+        </>}
         {taskslist.map((task) => (
         <tr key={task.id}>
         <td><input type="checkbox" className="checkbox" checked={!!task.selected}
@@ -42,7 +48,7 @@ export default function TaskList({ taskslist, onSelectAll, onSelectOne }) {
         ))}
         </tbody>
         </table>
-        </div>}
+        </div>
         </>
     );
 }

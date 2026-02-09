@@ -13,8 +13,6 @@ export default function TaskDetails({taskslist, onToggle}) {
 
     return (
         <>
-        <p className="detailpara">Mark Task As Completed : <input type="checkbox" className="checkbox" 
-        checked={task.status}  onChange={() => onToggle(task.id)} /></p>
         <div className="taskdetails">
         <div>
         <label>Task Name : </label>
@@ -22,14 +20,16 @@ export default function TaskDetails({taskslist, onToggle}) {
         </div>
         <div>
         <label>Task Details : </label>
-        <span>{task.description}</span>
+        <p>{task.description}</p>
         </div>
         <div>
         <label>Created On : </label>
         <span>{task.createdOn}</span>
         </div>
-        <div>
+        <p className="detailpara">Task Status : {task.status ? 'Completed' : 'Pending'}</p>
+        <div className="detailbtn-container">
         <Button onClick={() => navigate('/')}>Back</Button>
+        <Button onClick={() => navigate(`/task/Update/${task.id}`)}>Edit</Button>
         </div>
         </div>
         </>
