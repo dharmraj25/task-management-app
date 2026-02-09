@@ -112,7 +112,7 @@ function App() {
       </>} 
       />
       <Route 
-      path='/task/new'
+      path='/task/Create'
       element={
         <CreateTask onAddTasks={addTasks} />
       }
@@ -123,7 +123,7 @@ function App() {
       <TaskDetails taskslist={taskslist} onToggle={handleToggle} /> }
       />
       <Route 
-      path='/task/Update/:id'
+      path='/task/:id/Edit'
       element={
         <UpdateTask onUpdate={handleUpdateTask} taskslist={taskslist}
         onToggle={handleToggle} />
