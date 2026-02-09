@@ -14,7 +14,7 @@ export default function TaskInput({ taskslist, onDeleteTasks, setFilter, showOnl
         <div className="inputbtn-container top-buttons">
         <button onClick={() => navigate('/task/new')} className='inputbtn' title="Add Task" >+</button>
         <button className='inputbtn' title={canEdit ? 'Edit Task' : 'Select One Task To Edit'} 
-        disabled={!canEdit} onClick={() => navigate(`/task/Update/${selectedTask[0].id}`)}
+        disabled={!canEdit} onClick={() => navigate(`/task/${selectedTask[0].id}/Edit`)}
          >✏️</button>
         <button onClick={onDeleteTasks} title="Delete Task"
         disabled={!taskslist.some(task => task.selected)} className='inputbtn'>

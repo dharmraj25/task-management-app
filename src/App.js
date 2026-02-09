@@ -112,7 +112,7 @@ function App() {
       </>} 
       />
       <Route 
-      path='/task/Create'
+      path='/task/new'
       element={
         <CreateTask onAddTasks={addTasks} />
       }

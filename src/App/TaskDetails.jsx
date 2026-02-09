@@ -29,7 +29,7 @@ export default function TaskDetails({taskslist, onToggle}) {
         <p className="detailpara">Task Status : {task.status ? 'Completed' : 'Pending'}</p>
         <div className="detailbtn-container">
         <Button onClick={() => navigate('/')}>Back</Button>
-        <Button onClick={() => navigate(`/task/Update/${task.id}`)}>Edit</Button>
+        <Button onClick={() => navigate(`/task/${task.id}/Edit`)}>Edit</Button>
         </div>
         </div>
         </>
