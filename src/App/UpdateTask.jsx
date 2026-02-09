@@ -4,6 +4,7 @@ import Button from "./Button";
 
 
 export default function UpdateTask({onUpdate, taskslist, onToggle}) {
+    const [isCompleted, setIsCompleted] = useState(false);
     const {id} = useParams();
     const navigate = useNavigate();
     const task = taskslist.find(task => task.id === Number(id));
@@ -15,6 +16,7 @@ export default function UpdateTask({onUpdate, taskslist, onToggle}) {
         if (task){
             setTaskName(task.title);
             setDescription(task.description)
+            setIsCompleted(task.status)
         }
     }, [task])
 
@@ -39,11 +41,11 @@ export default function UpdateTask({onUpdate, taskslist, onToggle}) {
         </div>
         <div className="update-text">
         <p>Mark Task as Completed : </p>
-        <input type="checkbox" className="update-checkbox" checked={task.status}
-        onChange={() => onToggle(task.id)} /></div>
+        <input type="checkbox" className="update-checkbox" checked={isCompleted}
+        onChange={(event) => setIsCompleted(event.target.checked)} /></div>
         <div className="crttaskbtn-container">
         <Button className='crttaskbtn' onClick={() => navigate('/')}>Back</Button> 
-        <Button className='crttaskbtn' onClick={() => {onUpdate(Number(id), taskName, description)
+        <Button className='crttaskbtn' onClick={() => {onUpdate(Number(id), taskName, description, isCompleted)
         navigate('/')
         }}>Update</Button>
         </div>

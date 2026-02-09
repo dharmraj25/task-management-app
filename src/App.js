@@ -71,10 +71,11 @@ function App() {
     localStorage.setItem('counter', JSON.stringify(counter));
   }, [counter]);
 
-  function handleUpdateTask(id, updatedTitle, updatedDesc){
+  function handleUpdateTask(id, updatedTitle, updatedDesc, isCompleted){
     setTaskslist(prev => 
       prev.map(task => 
-        task.id === id ? {...task, title : updatedTitle, description : updatedDesc} : task
+        task.id === id ? {...task, title : updatedTitle, description : updatedDesc,
+           status : isCompleted} : task
       )
     )
     
@@ -90,6 +91,12 @@ function App() {
       <>
       <div className="page-layout">
         <div className="left-section">
+        <TaskInput  taskslist={taskslist}
+        onDeleteTasks={handleDeleteTasks}
+        filter={filter}
+        setFilter={setFilter}
+        showOnlyButtons
+        />
       <TaskList taskslist={filteredTask} onSelectOne={handleSelectOne}
        onSelectAll={handleSelectAll} />
        </div>
@@ -98,6 +105,7 @@ function App() {
         onDeleteTasks={handleDeleteTasks}
         filter={filter}
         setFilter={setFilter}
+        showOnlyCards
         />
       </div>
        </div>
