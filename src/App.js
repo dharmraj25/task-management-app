@@ -17,12 +17,13 @@ function App() {
     return JSON.parse(localStorage.getItem('counter')) || 1;
   });
   const [filter, setFilter] = useState('All');
+  
 
-  function addTasks(taskName, description) {
+  function addTasks(taskName, description, dueDate) {
     setTaskslist(prevTasks => 
       [...prevTasks, {
         selected: false, id: counter, status: false, title: taskName,
-        description: description, createdOn: new Date().toLocaleDateString()
+        description: description,dueDate , createdOn: new Date().toLocaleDateString()
       }])
       setCounter(prevCounter => prevCounter + 1);
   }
@@ -71,11 +72,11 @@ function App() {
     localStorage.setItem('counter', JSON.stringify(counter));
   }, [counter]);
 
-  function handleUpdateTask(id, updatedTitle, updatedDesc, isCompleted){
+  function handleUpdateTask(id, updatedTitle, updatedDesc, updatedDueDate, isCompleted){
     setTaskslist(prev => 
       prev.map(task => 
         task.id === id ? {...task, title : updatedTitle, description : updatedDesc,
-           status : isCompleted} : task
+         dueDate: updatedDueDate, status : isCompleted} : task
       )
     )
     

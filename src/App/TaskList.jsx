@@ -1,10 +1,8 @@
 import Notes from "../App/Notes.png";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import {getDueDates} from "./getRemainingDays";
 
 export default function TaskList({ taskslist, onSelectAll, onSelectOne }) {
-
-    const navigate = useNavigate();
 
     return (
         <>
@@ -19,13 +17,14 @@ export default function TaskList({ taskslist, onSelectAll, onSelectOne }) {
         <th>Status</th>
         <th>Task Title</th>
         <th>Created On</th>
+        <th>Due Date</th>
         </tr>
         </thead>
         
         <tbody>
         {taskslist.length === 0 && <>
         <tr>
-        <td colSpan={5}>
+        <td colSpan={6}>
             <div className="no-records">
                 <img src={Notes} alt="Notes" className="notesimage" />
             </div>
@@ -44,6 +43,8 @@ export default function TaskList({ taskslist, onSelectAll, onSelectOne }) {
         <td className="task-title">
         <Link to={`/task/${task.id}`}>{task.title}</Link></td>
         <td>{task.createdOn}</td>
+        <td className={`due-Date ${getDueDates(task.dueDate)}`}
+        >{task.dueDate ? new Date(task.dueDate).toLocaleDateString() : 'Not Set'}</td>
         </tr>
         ))}
         </tbody>
