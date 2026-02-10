@@ -2,11 +2,12 @@ import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 import { useState } from "react";
 
-export default function CreateTask({onAddTasks, task}) {
+export default function CreateTask({onAddTasks}) {
     const [taskName, setTaskName] = useState('');
     const [description, setDescription] = useState('');
     const [errName, setErrName] = useState('')
     const [errDescription, setErrDescription] = useState('')
+    const [dueDate, setDueDate] = useState('');
     const navigate = useNavigate();
         
 
@@ -20,7 +21,7 @@ export default function CreateTask({onAddTasks, task}) {
             setErrDescription('PLease Enter Details');
             return;
         }
-        onAddTasks(taskName, description);
+        onAddTasks(taskName, description, dueDate);
         setTaskName('');
         navigate('/')
     }
@@ -48,6 +49,10 @@ export default function CreateTask({onAddTasks, task}) {
             setErrDescription('');} 
             }}></textarea>
             {errDescription && <span className="error">{errDescription}</span>}
+            </div>
+            <div className="crttaskinput duedate-wrapper">
+            <label>Due Date : </label>
+            <input type="date" value={dueDate} onChange={(event) => {setDueDate(event.target.value)}} />
             </div>
             </div>
             <div className="crttaskbtn-container">

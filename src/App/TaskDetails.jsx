@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
+import {getDueDates} from "./getRemainingDays";
 
-export default function TaskDetails({taskslist, onToggle}) {
+export default function TaskDetails({taskslist}) {
     const navigate = useNavigate();
     const {id} = useParams();
     const task = taskslist.find(task => task.id === Number(id));
@@ -25,6 +26,10 @@ export default function TaskDetails({taskslist, onToggle}) {
         <div>
         <label>Created On : </label>
         <span>{task.createdOn}</span>
+        </div>
+        <div>
+        <label>Due Date : </label>
+        <span className={`due-Date ${getDueDates(task.dueDate)}`}>{task.dueDate ? new Date(task.dueDate).toLocaleDateString() : 'Not Set'}</span>
         </div>
         <p className="detailpara">Task Status : {task.status ? 'Completed' : 'Pending'}</p>
         <div className="detailbtn-container">

@@ -151,6 +151,7 @@ padding: 15px 20px;
 font-size: 18px;
 font-family: 'Copperplate Gothic Light';
 font-weight: bold; 
+cursor: pointer;
 }
 
 .inputbtn:disabled{
@@ -342,5 +343,25 @@ font-weight: bold;
   .page-layout {
     flex-direction: column;
   }
+}
+
+.duedate-wrapper{
+  margin-top: 40px;
+}
+
+.due-Date{
+  font-weight: bold;
+}
+
+.Overdue{
+  color: red;
+}
+
+.Today{
+  color: orange;
+}
+
+.Upcoming{
+color: green;
 }
 

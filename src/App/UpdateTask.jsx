@@ -1,10 +1,11 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Button from "./Button";
+import { getDueDates } from "./getRemainingDays";
 
-
-export default function UpdateTask({onUpdate, taskslist, onToggle}) {
+export default function UpdateTask({onUpdate, taskslist}) {
     const [isCompleted, setIsCompleted] = useState(false);
+    const [dueDate, setDueDate] = useState('');
     const {id} = useParams();
     const navigate = useNavigate();
     const task = taskslist.find(task => task.id === Number(id));
@@ -17,6 +18,7 @@ export default function UpdateTask({onUpdate, taskslist, onToggle}) {
             setTaskName(task.title);
             setDescription(task.description)
             setIsCompleted(task.status)
+            setDueDate(task.dueDate || '')
         }
     }, [task])
 
@@ -39,13 +41,18 @@ export default function UpdateTask({onUpdate, taskslist, onToggle}) {
         onChange={(event) => setDescription(event.target.value)}></textarea>            
         </div>
         </div>
+        <div className="crttaskinput duedate-wrapper">
+            <label>Due Date : </label>
+            <input type="date" value={dueDate} className={`due-Date ${getDueDates(task.dueDate)}`}
+            onChange={(event) => {setDueDate(event.target.value)}} />
+            </div>
         <div className="update-text">
         <p>Mark Task as Completed : </p>
         <input type="checkbox" className="update-checkbox" checked={isCompleted}
         onChange={(event) => setIsCompleted(event.target.checked)} /></div>
         <div className="crttaskbtn-container">
         <Button className='crttaskbtn' onClick={() => navigate('/')}>Back</Button> 
-        <Button className='crttaskbtn' onClick={() => {onUpdate(Number(id), taskName, description, isCompleted)
+        <Button className='crttaskbtn' onClick={() => {onUpdate(Number(id), taskName, description, dueDate, isCompleted)
         navigate('/')
         }}>Update</Button>
         </div>
