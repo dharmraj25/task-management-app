@@ -3,16 +3,81 @@
   padding: 0;
 }
 
+html, body, #root {
+  height: 100%;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+.app.dark {
+  background-color: #333;
+  color: whitesmoke;
+}
+
+.app.light {
+  background-color: white;
+  color: black;
+}
+
+.app a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .header {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   background : linear-gradient(135deg, #bdc3c7 50%, #2c3e50 100%);
-  height: 90px;
+  height: 80px;
   font-family: 'Copperplate Gothic Light';
-  font-size: 25px;
+  font-size: 22px;
   color: black;
   font-weight: bold;
+}
+
+.switch {
+  position: absolute;
+  width: 50px;
+  height: 25px;
+  right: 20px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  background: #ccc;
+  border-radius: 25px;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.slider::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  top: 2.5px;
+  left: 3px;
+  transition: 0.3s;
+  }
+
+input:checked + .slider {
+  background: grey;
+}
+
+input:checked + .slider::before {
+  transform: translateX(24px);
 }
 
 .button {
@@ -51,7 +116,7 @@ th, td{
   display: flex;
   justify-content: start; 
   margin: 0;
-  min-height: 300px;
+  min-height: 450px;
 }
 
 .else-container {
@@ -103,10 +168,10 @@ th, td{
 
 .crttask{
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
-  gap: 40px;
   padding: 20px;
+  min-height: 100vh;
+  gap: 30px;
 }
 
 .crttaskinput{
@@ -140,6 +205,42 @@ th, td{
   width: 100%;
   max-width: 400px;
   height: 200px;
+}
+
+.dropdown.light{
+  background : linear-gradient(135deg, #bdc3c7 50%, #2c3e50 100%);
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-family: 'Copperplate Gothic Light';
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.dropdown.dark{
+  background : linear-gradient(135deg, #bdc3c7 50%, #2c3e50 100%);
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-family: 'Copperplate Gothic Light';
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.dropdowncrt{
+ border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-family: 'Copperplate Gothic Light';
+  font-size: 15px;
+  color: black;
+  cursor: pointer;
+  width: fit-content; 
 }
 
 .crttaskbtn{
@@ -207,7 +308,6 @@ cursor: pointer;
   flex-direction: column;
   gap: 20px;
   font-family: 'Copperplate Gothic Light';
-  margin-top: 20px;
 }
 
 .all-card{
@@ -250,10 +350,28 @@ cursor: pointer;
   background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
 }
 
+.search{
+  background : linear-gradient(135deg, #bdc3c7 70%, #2c3e50 100%);
+  border-radius: 10px;
+  padding: 12px;
+  font-family: 'Copperplate Gothic Light';
+  font-size: 18px;
+  width: 50%;
+  color: black;
+  border-color: gainsboro;
+}
+
+.search-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 65%;
+}
 
 .inputbtn-container{
   display: flex;
-  justify-content: center;
+  justify-content: end;
+  align-items: center;
   gap: 10px;
 }
 
@@ -282,11 +400,19 @@ cursor: pointer;
   margin-bottom: 100px;
 }
 
-.no-records-text{
+.no-records-text.light{
   font-family: 'Copperplate Gothic Light';
   font-size: 18px;
   font-weight: bold;
   color: black;
+  margin-bottom: 50px;
+}
+
+.no-records-text.dark{
+  font-family: 'Copperplate Gothic Light';
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
   margin-bottom: 50px;
 }
 
@@ -335,7 +461,9 @@ cursor: pointer;
 }
 
 .top-buttons{
-  justify-content: flex-end;
+  display: flex;
+  align-items: center;
+  width: 100%;
   margin-bottom: 10px;
 }
 
@@ -346,22 +474,212 @@ cursor: pointer;
 }
 
 .duedate-wrapper{
-  margin-top: 40px;
+  margin-top: 30px;
+}
+
+.crtduedate{
+  color: grey;
+}
+
+.crtprior{
+  color: grey;
+}
+
+.calendar-due-date{
+  font-weight: normal;
 }
 
 .due-Date{
   font-weight: bold;
 }
 
-.Overdue{
+.due-Overdue{
   color: red;
 }
 
-.Today{
+.due-today{
   color: orange;
 }
 
-.Upcoming{
-color: black;
+.app.light .due-Date.due-Upcoming{
+color: green;
 }
 
+.app.dark .due-Date.due-Upcoming{
+color: lightgreen;
+}
+
+.calendar-container.dark{
+  border: 2px solid darkgrey;
+  padding: 15px; 
+  border-radius: 10px;
+  height: 258px;
+  width: 350px;
+}
+
+.calendar-container.light{
+  border: 2px solid darkgrey;
+  padding: 15px; 
+  border-radius: 10px;
+  height: 258px;
+  width: 350px; 
+}
+
+.calendar-container .date.due-Overdue {
+  color: red;
+} 
+
+.calendar-container.dark .date.due-today{
+  color: orange;
+}
+
+.calendar-container.light .date.due-today{
+  color: orange;
+}
+
+.calendar-container.light .date.due-Date.due-Upcoming{
+  color: darkgreen;
+}
+
+.calendar-heading.dark {
+font-family: 'Copperplate Gothic Light';
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 23px;
+font-weight: bold;
+margin-bottom: 10px;
+border-bottom: 2px solid darkgrey;
+padding-bottom: 10px;
+color: darkgrey;
+}
+
+.previous{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  margin-right: 350px;
+}
+
+.next{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  margin-left: 350px;
+}
+
+.calendar-heading.light {
+font-family: 'Copperplate Gothic Light';
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 70px;
+font-size: 23px;
+font-weight: bold;
+margin-bottom: 10px;
+border-bottom: 2px solid darkgrey;
+padding-bottom: 10px;
+color: darkgrey;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  font-family: 'Copperplate Gothic Light';
+  font-size: 18px;
+  text-align: center;
+  color: darkgrey;
+}
+
+.today.light{
+  font-weight: bold;
+  color: black;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+.today.dark{
+  font-weight: bold;
+  color: white;
+  border: 1px solid white;
+  border-radius: 50%;
+}
+
+.empty{
+  visibility: hidden;
+}
+
+.date, .empty{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+}
+
+.date{
+  cursor: pointer;
+}
+
+.date.light{
+  color: darkgrey;
+}
+
+.tableheaders {
+  cursor: pointer;
+}
+
+.th-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.selected {
+  background-color: gainsboro;
+  border-radius: 50%;
+}
+
+.th-dropdown {
+  position: relative;
+  text-align: center;
+}
+
+.header-select {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: inherit;
+  font-weight: inherit;
+  font-family: 'Copperplate Gothic Light';
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.th-dropdown::after {
+  content: "\25BC";
+  position: absolute;
+  right: 15px;
+  top: 53%;
+  transform: translateY(-50%);
+  font-size: 11px;
+}
+
+.th-dropdown.dark::after{
+  color: white;
+}
+
+.header-select.dark {
+  color: white;
+}
+
+.values.dark{
+  color: black;
+  font-weight: bold;
+}

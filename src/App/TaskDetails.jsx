@@ -16,7 +16,7 @@ export default function TaskDetails({taskslist}) {
         <>
         <div className="taskdetails">
         <div>
-        <label>Task Name : </label>
+        <label>Subject Name : </label>
         <span>{task.title}</span>
         </div>
         <div>
@@ -29,9 +29,15 @@ export default function TaskDetails({taskslist}) {
         </div>
         <div>
         <label>Due Date : </label>
-        <span className={`due-Date ${getDueDates(task.dueDate)}`}>{task.dueDate ? new Date(task.dueDate).toLocaleDateString() : 'Not Set'}</span>
+        <span className={`due-Date ${task.dueDate ? getDueDates(task.dueDate) : ''}`}>
+            {task.dueDate ? new Date(task.dueDate).toLocaleDateString() : 'Not Set'}
+        </span>
         </div>
         <p className="detailpara">Task Status : {task.status ? 'Completed' : 'Pending'}</p>
+        <div>
+        <label>Priority : </label>
+        <span>{task.priority}</span>
+        </div>
         <div className="detailbtn-container">
         <Button onClick={() => navigate('/')}>Back</Button>
         <Button onClick={() => navigate(`/task/${task.id}/Edit`)}>Edit</Button>

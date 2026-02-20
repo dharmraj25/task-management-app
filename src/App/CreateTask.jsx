@@ -2,12 +2,14 @@ import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 import { useState } from "react";
 
-export default function CreateTask({onAddTasks}) {
+export default function CreateTask({onAddTasks, on}) {
     const [taskName, setTaskName] = useState('');
     const [description, setDescription] = useState('');
     const [errName, setErrName] = useState('')
     const [errDescription, setErrDescription] = useState('')
     const [dueDate, setDueDate] = useState('');
+    const [errDueDate, setErrDueDate] = useState('')
+    const [prior, setPrior] = useState('Low')
     const navigate = useNavigate();
         
 
@@ -21,7 +23,13 @@ export default function CreateTask({onAddTasks}) {
             setErrDescription('PLease Enter Details');
             return;
         }
-        onAddTasks(taskName, description, dueDate);
+
+        if(dueDate.trim() === ''){
+            setErrDueDate('Please Enter Due Date');
+            return;
+        }
+    
+        onAddTasks(taskName, description, dueDate, prior);
         setTaskName('');
         navigate('/')
     }
@@ -30,8 +38,8 @@ export default function CreateTask({onAddTasks}) {
         <>
             <div className="crttask">
             <div className="crttaskinput">
-            <label>Task Name : </label>
-            <div className="input-wrapper">
+            <label>Subject Name : </label>
+            <div className={`input-wrapper ${on ? 'dark' : 'light'}`}>
             <input type="text" placeholder="Enter Name"  value={taskName}
             onChange={(event) => {setTaskName(event.target.value);
                 if(event.target.value.trim() !== ''){
@@ -52,8 +60,17 @@ export default function CreateTask({onAddTasks}) {
             </div>
             <div className="crttaskinput duedate-wrapper">
             <label>Due Date : </label>
-            <input type="date" value={dueDate} onChange={(event) => {setDueDate(event.target.value)}} />
+            <input type="date" className="crtduedate" value={dueDate} onChange={(event) => {setDueDate(event.target.value)}} />
+            {errDueDate && <p className="error">{errDueDate}</p>}
             </div>
+            </div>
+            <div className="crttaskinput">
+            <label>Priority : </label>
+            <select className='dropdowncrt crtprior' value={prior} onChange={(event) => setPrior(event.target.value)}>
+                <option value="High" className="crtprior">High</option>
+                <option value="Medium" className="crtprior">Medium</option>
+                <option value="Low" className="crtprior">Low</option>
+            </select>
             </div>
             <div className="crttaskbtn-container">
              
